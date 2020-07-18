@@ -1,5 +1,7 @@
 import React from 'react';
 import './App.css';
+import Sidebar from './sidebar/sidebar'
+import Editor from './editor/editor'
 
 const firebase = require("firebase");
 
@@ -17,7 +19,12 @@ class App extends React.Component{
   }
 
   render(){
-    return(<div>Hello World</div>);
+    return(
+      <div classname="api-container">
+        <Sidebar></Sidebar>
+        <Editor></Editor>
+      </div>
+    );
   }
 
   //called once when the component is mounted
@@ -28,8 +35,8 @@ class App extends React.Component{
       //gets called whenever db is updated
       .onSnapshot(serverUpdate => {
         const notes = serverUpdate.docs.map(doc => {
-          const data = _doc.data();
-          data["id"] = _doc.id;
+          const data = doc.data();
+          data["id"] = doc.id;
           return data;
         });
         this.setState({note: notes});

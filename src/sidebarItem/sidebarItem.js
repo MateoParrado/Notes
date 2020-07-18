@@ -1,9 +1,10 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
-import List from '@material-ui/core/List';
-import { Divider, Button } from '@material-ui/core';
-import SidebarItemComponent from '../sidebaritem/sidebarItem';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { removeHTMLTags } from '../helpers';
 
 //handles showing the names of the notes on the sidebar
 class SidebarItem extends React.Component{

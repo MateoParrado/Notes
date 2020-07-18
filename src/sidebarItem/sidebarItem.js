@@ -6,14 +6,14 @@ import { Divider, Button } from '@material-ui/core';
 import SidebarItemComponent from '../sidebaritem/sidebarItem';
 
 //handles showing the names of the notes on the sidebar
-class Sidebar extends React.Component{
+class SidebarItem extends React.Component{
     constructor(){
         super();
     }
 
     render(){
-        return(<div>sidebar</div>);
+        return(<div>item</div>);
     }
 }
 
-export default withStyles(styles)(Sidebar);
+export default withStyles(styles)(SidebarItem);

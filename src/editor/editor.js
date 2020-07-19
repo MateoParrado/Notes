@@ -11,11 +11,29 @@ class Editor extends React.Component{
     constructor(){
         super();
         this.state = {
-            test: '',
+            text: '',
             title: '',
             id: ''
         }
     }
+
+    componentDidMount = () => {
+        this.setState({
+            text: this.props.selNote.body,
+            title: this.props.selNote.title,
+            id: this.props.selNote.id
+        });
+    }
+
+    componentDidUpdate = () => {
+        if(this.props.selNote.id !== this.state.id) {
+          this.setState({
+            text: this.props.selNote.body,
+            title: this.props.selNote.title,
+            id: this.props.selNote.id
+          });
+        }
+      }
 
     render(){
         const {classes} = this.props;
@@ -23,7 +41,7 @@ class Editor extends React.Component{
         return(
         <div className = {classes.editorContainer}>
             <ReactQuill
-                val = {this.state.text}
+                value = {this.state.text}
                 onChange = {this.updateBody}>
             </ReactQuill>
         </div>
@@ -36,7 +54,10 @@ class Editor extends React.Component{
     }
 
     update = debounce(() => {
-
+        this.props.noteUpdate(this.state.id, {
+            title: this.state.title,
+            body: this.state.text
+        });
     }, 1500);
 }
 

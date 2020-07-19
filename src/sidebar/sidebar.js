@@ -74,7 +74,8 @@ class Sidebar extends React.Component{
     }
 
     newNote = () => {
-        
+        this.props.newNote(this.state.title);
+        this.setState({title: null, addingNote: false});
     }
 
     updateTitle = (txt) => {
@@ -83,9 +84,7 @@ class Sidebar extends React.Component{
 
     selectNote = (note, index) => this.props.selectNote(note, index);
 
-    deleteNote = () => {
-        
-    }
+    deleteNote = (note) => this.props.deleteNote(note);
 }
 
 export default withStyles(styles)(Sidebar);

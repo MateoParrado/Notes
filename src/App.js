@@ -29,9 +29,9 @@ class App extends React.Component{
         newNote={this.newNote}>
         </Sidebar>
         {
-          this.state.selectedNote ?
-          <Editor selectedNote={this.state.selectedNote}
-          selectedNoteIndex={this.state.selectedNoteIndex}
+          this.state.selNote ?
+          <Editor selNote={this.state.selNote}
+          selNoteInd={this.state.selNoteInd}
           notes={this.state.notes}
           noteUpdate={this.noteUpdate}>
           </Editor> :
@@ -58,7 +58,74 @@ class App extends React.Component{
 
   }
 
-  selectNote = (note, index) => this.setState({ selNoteInd: index, selectedNote: note });
+  //called when note is selected from sidebar
+  selectNote = (note, index) => this.setState({ selNoteInd: index, selNote: note });
+
+  //called when note body is changed
+  noteUpdate = (id, note) => {
+    firebase
+      .firestore()
+      .collection('notes')
+      .doc(id)
+      .update({
+        title: note.title,
+        body: note.body,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+  }
+
+  newNote = async (title) => {
+
+    const note = {
+      title: title,
+      body: ''
+    };
+    
+    //tell firebase to make a new note for us
+    const newFromDB = await firebase
+      .firestore()
+      .collection('notes')
+      .add({
+        title: note.title,
+        body: note.body,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+    //get this note's id
+    const newID = newFromDB.id;
+
+    await this.setState({ notes: [...this.state.notes, note] });
+    
+    //find index of this new note
+    const newNoteIndex = this.state.notes.indexOf(this.state.notes.filter(_note => _note.id === newID)[0]);
+    
+    //set our state to focus on it
+    this.setState({ selNote: this.state.notes[newNoteIndex], selNotInd: newNoteIndex });
+  }
+
+  deleteNote = async (note) => {
+    const noteIndex = this.state.notes.indexOf(note);
+    
+    //remove it from the notes list
+    await this.setState({ notes: this.state.notes.filter(_note => _note !== note) });
+    
+    //if we delete our current note, unfocus it
+    if(this.state.selNoteInd === noteIndex) {
+      this.setState({ selNoteInd: null, selNote: null });
+    } 
+    //else, shift our array position down by one (because it is now one shorter)
+    else {
+      this.state.notes.length > 1 ?
+      this.selectNote(this.state.notes[this.state.selNoteInd - 1], this.state.selNoteInd - 1) :
+      this.setState({ selNoteInd: null, selNote: null });
+    }
+
+    firebase
+      .firestore()
+      .collection('notes')
+      .doc(note.id)
+      .delete();
+  }
 }
 
 export default App;

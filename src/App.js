@@ -14,7 +14,7 @@ class App extends React.Component{
     this.state = {
       selNotInd: null,
       selNote: null,
-      note: null
+      notes: null
     };
   }
 
@@ -45,7 +45,7 @@ class App extends React.Component{
           data["id"] = doc.id;
           return data;
         });
-        this.setState({note: notes});
+        this.setState({notes: notes});
       });
 
   }

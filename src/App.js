@@ -20,9 +20,15 @@ class App extends React.Component{
 
   render(){
     return(
-      <div classname="api-container">
-        <Sidebar></Sidebar>
-        <Editor></Editor>
+      <div className="api-container">
+        <Sidebar 
+        selNoteInd = {this.state.selNoteInd}
+        notes = {this.state.notes}>
+
+        </Sidebar>
+        <Editor>
+          
+        </Editor>
       </div>
     );
   }

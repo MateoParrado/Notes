@@ -1,15 +1,19 @@
 
 //function that ensures we don't send too many http requests
 // waits 1 second after the user finishes typing to send one
-export default function debounce(a,b,c){
+
+//first param is a func, EXPLAIN LATER
+//second param is wait time
+//if force is set to true it will update no mater what
+export default function debounce(updateFunc, awaitTime, force){
     var doc,e;
 
     return function(){
       function h(){
         doc=null;
-        c||(e=a.apply(this,arguments));
+        force||(e=updateFunc.apply(this,arguments));
       }
-      return (clearTimeout(doc),doc=setTimeout(h,b),c&&!doc&&(e=a.apply(this,arguments)),e)
+      return (clearTimeout(doc),doc=setTimeout(h,awaitTime),force&&!doc&&(e=updateFunc.apply(this,arguments)),e)
     }
   }
   

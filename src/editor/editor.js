@@ -10,17 +10,34 @@ import styles from './styles';
 class Editor extends React.Component{
     constructor(){
         super();
+        this.state = {
+            test: '',
+            title: '',
+            id: ''
+        }
     }
 
     render(){
-        const classes = this.props;
+        const {classes} = this.props;
 
         return(
-        <div className = {classes.editor}>
-            <ReactQuill></ReactQuill>
+        <div className = {classes.editorContainer}>
+            <ReactQuill
+                val = {this.state.text}
+                onChange = {this.updateBody}>
+            </ReactQuill>
         </div>
         );
     }
+
+    updateBody = async(val) =>{
+        await this.setState({text: val});
+        this.update();
+    }
+
+    update = debounce(() => {
+
+    }, 1500);
 }
 
 export default withStyles(styles)(Editor);

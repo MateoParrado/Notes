@@ -7,8 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 import styles from './styles';
 
 //main text editor class
-class Editor extends React.Component{
-    constructor(){
+class Editor extends React.Component {
+    constructor() {
         super();
         this.state = {
             text: '',
@@ -26,30 +26,42 @@ class Editor extends React.Component{
     }
 
     componentDidUpdate = () => {
-        if(this.props.selNote.id !== this.state.id) {
-          this.setState({
-            text: this.props.selNote.body,
-            title: this.props.selNote.title,
-            id: this.props.selNote.id
-          });
+        if (this.props.selNote.id !== this.state.id) {
+            this.setState({
+                text: this.props.selNote.body,
+                title: this.props.selNote.title,
+                id: this.props.selNote.id
+            });
         }
-      }
+    }
 
-    render(){
-        const {classes} = this.props;
+    render() {
+        const { classes } = this.props;
 
-        return(
-        <div className = {classes.editorContainer}>
-            <ReactQuill
-                value = {this.state.text}
-                onChange = {this.updateBody}>
-            </ReactQuill>
-        </div>
+        return (
+            <div className={classes.editorContainer}>
+                <BorderColorIcon className={classes.editIcon}></BorderColorIcon>
+                <input
+                    className={classes.titleInput}
+                    placeholder='Note title...'
+                    value={this.state.title ? this.state.title : ''}
+                    onChange={(e) => this.updateTitle(e.target.value)}>
+                </input>
+                <ReactQuill
+                    value={this.state.text}
+                    onChange={this.updateBody}>
+                </ReactQuill>
+            </div>
         );
     }
 
-    updateBody = async(val) =>{
-        await this.setState({text: val});
+    updateBody = async (val) => {
+        await this.setState({ text: val });
+        this.update();
+    }
+
+    updateTitle = async (txt) => {
+        await this.setState({ title: txt });
         this.update();
     }
 

@@ -81,9 +81,7 @@ class Sidebar extends React.Component{
         this.setState({title: txt});
     }
 
-    selectNote = () => {
-
-    }
+    selectNote = (note, index) => this.props.selectNote(note, index);
 
     deleteNote = () => {
         

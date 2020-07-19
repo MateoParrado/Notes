@@ -32,6 +32,13 @@ class SidebarItem extends React.Component{
             </div>
           );
     }
+
+    selectNote = (note, index) => this.props.selectNote(note, index);
+    deleteNote = (note) => {
+        if(window.confirm(`Are you sure you want to delete: ${note.title}`)) {
+          this.props.deleteNote(note);
+        }
+      }
 }
 
 export default withStyles(styles)(SidebarItem);

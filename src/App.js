@@ -23,12 +23,20 @@ class App extends React.Component{
       <div className="api-container">
         <Sidebar 
         selNoteInd = {this.state.selNoteInd}
-        notes = {this.state.notes}>
-
+        notes = {this.state.notes}
+        deleteNote={this.deleteNote}
+        selectNote={this.selectNote}
+        newNote={this.newNote}>
         </Sidebar>
-        <Editor>
-          
-        </Editor>
+        {
+          this.state.selectedNote ?
+          <Editor selectedNote={this.state.selectedNote}
+          selectedNoteIndex={this.state.selectedNoteIndex}
+          notes={this.state.notes}
+          noteUpdate={this.noteUpdate}>
+          </Editor> :
+          null
+        }
       </div>
     );
   }
@@ -49,6 +57,8 @@ class App extends React.Component{
       });
 
   }
+
+  selectNote = (note, index) => this.setState({ selNoteInd: index, selectedNote: note });
 }
 
 export default App;

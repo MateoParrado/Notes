@@ -33,9 +33,10 @@ class Sidebar extends React.Component {
                         this.state.addingNote ?
                             <div>
                                 <input type='text'
+                                    ref={this.focusInput}
                                     className={classes.newNoteInput}
                                     placeholder='Enter note title'
-                                    onKeyUp={(e) => this.updateTitle(e.target.value)}>
+                                    onKeyUp={(e) => this.updateTitle(e)}>
                                 </input>
                                 <Button
                                     className={classes.newNoteSubmitBtn}
@@ -69,6 +70,12 @@ class Sidebar extends React.Component {
         return (<div></div>);
     }
 
+    focusInput = (component) => {
+        if (component) {
+            component.focus();
+        }
+    }
+
     newNoteClick = () => {
         this.setState({ addingNote: !this.state.addingNote, title: null });
     }
@@ -79,7 +86,12 @@ class Sidebar extends React.Component {
     }
 
     updateTitle = (txt) => {
-        this.setState({ title: txt });
+        if (txt.key === "Enter") {
+            this.newNote();
+        }
+        else {
+            this.setState({ title: txt.target.value });
+        }
     }
 
     selectNote = (note, index) => this.props.selectNote(note, index);

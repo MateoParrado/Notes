@@ -109,15 +109,23 @@ class App extends React.Component {
     //remove it from the notes list
     await this.setState({ notes: this.state.notes.filter(_note => _note !== note) });
 
-    //if we delete our current note, unfocus it
-    if (this.state.selNoteInd === noteIndex) {
-      this.setState({ selNoteInd: null, selNote: null });
-    }
-    //else, shift our array position down by one (because it is now one shorter)
-    else {
-      this.state.notes.length > 1 ?
-        this.selectNote(this.state.notes[this.state.selNoteInd - 1], this.state.selNoteInd - 1) :
+    //only do this is we've selected something
+    if (this.state.selNotInd) {
+      //if we delete our current note, unfocus it
+      if (this.state.selNoteInd === noteIndex) {
         this.setState({ selNoteInd: null, selNote: null });
+      }
+      //else, shift our array position down by one (because it is now one shorter)
+      else {
+        //if our length is less than one just unfocus
+        if (this.state.notes.length < 1) {
+          this.setState({ selNoteInd: null, selNote: null });
+        }
+        //otherwise, if we deleted a note before ours we're going to have to move down one to adjust
+        else if (noteIndex < this.state.selNotInd) {
+          this.selectNote(this.state.notes[this.state.selNoteInd - 1], this.state.selNoteInd - 1);
+        }
+      }
     }
 
     firebase

@@ -1,7 +1,7 @@
 //style for the editor
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: 'black',
     height: 'calc(100% - 35px)',
     position: 'absolute',
     left: '0',

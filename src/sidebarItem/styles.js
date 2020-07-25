@@ -3,7 +3,8 @@ const styles = theme => ({
   listItem: {
     cursor: 'pointer',
     backgroundColor: '#000000',
-    color: '#ffffff'
+    color: '#ffffff',
+    draggable: 'true'
   },
   textSection: {
     maxWidth: '85%'

@@ -14,7 +14,7 @@ class SidebarItem extends React.Component {
     //return a list item with the primary being the title and the secondary being the first thirty chars of the body
     //selected if the selected note's index is this note's index
     return (
-      <div key={_index}>
+      <div key={_index} draggable='true' onClick={() => this.selectNote(_note, _index)}>
         <ListItem
           className={classes.listItem}
           selected={selNoteInd === _index}
@@ -41,6 +41,10 @@ class SidebarItem extends React.Component {
     if (window.confirm(`Are you sure you want to delete: ${note.title}`)) {
       this.props.deleteNote(note);
     }
+  }
+
+  dragStart = () =>{
+
   }
 }
 

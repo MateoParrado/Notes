@@ -26,7 +26,8 @@ class App extends React.Component {
           notes={this.state.notes}
           deleteNote={this.deleteNote}
           selectNote={this.selectNote}
-          newNote={this.newNote}>
+          newNote={this.newNote}
+          removeNote={this.removeNote}>
         </Sidebar>
         {
           this.state.selNote ?
@@ -35,7 +36,9 @@ class App extends React.Component {
               notes={this.state.notes}
               noteUpdate={this.noteUpdate}>
             </Editor> :
-            null
+            <div className="no-note-sel">
+              <center className='no-note-msg'>Select a note</center>
+            </div>
         }
       </div>
     );

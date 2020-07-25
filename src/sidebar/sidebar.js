@@ -41,11 +41,11 @@ class Sidebar extends React.Component {
                                 <Button
                                     className={classes.newNoteSubmitBtn}
                                     onClick={this.newNote}>Submit Note
-                        </Button>
+                                </Button>
                             </div> :
                             null
                     }
-                    <List>
+                    <List className={classes.removePadding}>
                         {
                             //create the list of note titles on the sidebar
                             notes.map((_note, _index) => {

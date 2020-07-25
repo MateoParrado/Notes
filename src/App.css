@@ -26,7 +26,6 @@ html, body {
 .ql-container {
   box-sizing: border-box;
   height: calc(100% - 42px);
-  overflow-y: scroll;
 }
 .ql-editor {
   cursor: text;
@@ -39,4 +38,22 @@ html, body {
   position: absolute;
   top: 50px;
   left: calc(50% - 165px);
+}
+
+.no-note-sel{
+  margin-left: 19vw;
+  width: 81vw;
+  height: 100vh;
+  background-color: black;
+  color: white;
+  
+}
+
+.no-note-msg{
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 50px;
 }

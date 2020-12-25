@@ -9,7 +9,7 @@ import API_KEY from "./config"
 const firebase = require("firebase");
 require("firebase/firestore");
 
-const firebaseConfig = {
+var firebaseConfig = {
   apiKey: API_KEY,
   authDomain: "notes-a4167.firebaseapp.com",
   databaseURL: "https://notes-a4167.firebaseio.com",
@@ -20,7 +20,6 @@ const firebaseConfig = {
   measurementId: "G-DE3NYF9LNT"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 

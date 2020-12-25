@@ -5,7 +5,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #555555;
+  background-color: #777777;
 }
 #notes-container {
   height: 100%;
@@ -22,7 +22,11 @@ html, body {
   float: left;
   background-color: #000000;
   color: #ffffff;
+  
+}::-webkit-scrollbar {
+  display: none;
 }
+
 .ql-container {
   box-sizing: border-box;
   height: calc(100% - 42px);
@@ -41,11 +45,11 @@ html, body {
 }
 
 .no-note-sel{
-  margin-left: 19vw;
+  margin-left: 19.6vw;
   width: 81vw;
   height: 100vh;
   background-color: black;
-  color: white;
+  color: rgb(29, 14, 14);
   
 }
 

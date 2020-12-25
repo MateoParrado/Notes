@@ -11,12 +11,6 @@ const styles = theme => ({
   newChatBtn: {
     borderRadius: '0px'
   },
-  unreadMessage: {
-    color: 'red',
-    position: 'absolute',
-    top: '0',
-    right: '5px'
-  },
   newNoteBtn: {
     width: '100%',
     height: '35px',
@@ -35,7 +29,11 @@ const styles = theme => ({
     boxSizing: 'border-box',
     float: 'left',
     overflowY: 'scroll',
-    overflowX: 'hidden'
+    overflowX: 'hidden',
+    scrollbarWidth: 'none',
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    }
   },
   newNoteInput: {
     width: '100%',
@@ -54,7 +52,7 @@ const styles = theme => ({
     borderRadius: '0px',
     color: 'white'
   },
-  removePadding:{
+  removePadding: {
     padding: '1px'
   }
 });
